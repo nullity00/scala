@@ -17,15 +17,17 @@ Open [http://localhost:3000](http://localhost:3000). Lessons live under `/learn/
 
 ### Code execution backend
 
-`TryIt` and `Exercise` components POST to `/api/run` and `/api/check`, which proxy to a
-Piston-compatible execution API (`EXECUTE_API_URL`, default: the public
-[Piston](https://github.com/engineer-man/piston) instance at `emkc.org`). For production, point
-`EXECUTE_API_URL` at a self-hosted Piston (or equivalent) instance — see ARCHITECTURE.md for why.
+`TryIt` and `Exercise` components POST to `/api/run` and `/api/check`, which proxy to the public
+[Piston](https://github.com/engineer-man/piston) API at `emkc.org` (`EXECUTE_API_URL` env var). No
+setup needed — this works out of the box locally and once deployed. It's a deliberate choice for
+the current (~2 user) scale, not a placeholder — see ARCHITECTURE.md for the reasoning and for
+what to switch to if that ever changes.
 
-```bash
-# .env.local
-EXECUTE_API_URL=https://your-piston-instance.example.com/api/v2/execute
-```
+## Deploying
+
+This is a stock Next.js app — deploy to [Vercel](https://vercel.com/new) by importing the
+`nullity00/scala` GitHub repo (`main` branch), no environment variables required. Vercel gives you
+a `*.vercel.app` URL immediately and redeploys automatically on every push to `main`.
 
 ## Adding a lesson
 
