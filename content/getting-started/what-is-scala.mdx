@@ -10,8 +10,11 @@ compiles to JVM bytecode, so it runs anywhere Java runs and can use any Java lib
 A few things make Scala worth learning:
 
 - **Every value is an object**, and every operation is a method call — even `1 + 2` is really `1.+(2)`.
-- **Functions are first-class values** — you can pass them around, return them, and store them in variables.
-- **The type system is expressive** but usually gets out of your way thanks to type inference.
+- **Functions work like any other value.** You can save one in a variable, hand it to another
+  function, or return one from a function — the same way you'd pass around a number or a string.
+- **You rarely have to write types out by hand.** Scala is strict about types behind the scenes
+  (it'll stop you from adding a number to a string), but it figures most types out on its own, so
+  your code doesn't get cluttered with `Int`, `String`, and so on everywhere.
 - **It runs on the JVM**, so you get Java's ecosystem, tooling, and performance characteristics for free.
 
 Companies like Twitter (now X), LinkedIn, Netflix, and Databricks (creators of Apache Spark) built

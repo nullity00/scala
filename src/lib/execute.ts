@@ -21,7 +21,10 @@ export async function runScala(code: string, stdin = ""): Promise<ExecutionResul
   try {
     const res = await fetch(EXECUTE_API_URL, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        "user-agent": "ScalaSchool/1.0 (+https://github.com/nullity00/scala)",
+      },
       signal: controller.signal,
       body: JSON.stringify({
         language: "scala",
@@ -34,7 +37,14 @@ export async function runScala(code: string, stdin = ""): Promise<ExecutionResul
     });
 
     if (!res.ok) {
-      return { stdout: "", stderr: "", exitCode: null, error: `Execution backend returned ${res.status}` };
+      const body = await res.text().catch(() => "");
+      const detail = body.slice(0, 300);
+      return {
+        stdout: "",
+        stderr: "",
+        exitCode: null,
+        error: `Execution backend returned ${res.status}${detail ? `: ${detail}` : ""}`,
+      };
     }
 
     const data = await res.json();
