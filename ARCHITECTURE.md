@@ -36,22 +36,19 @@ route handler) → execution backend → JSON `{ stdout, stderr, exitCode }` bac
 API route never runs code itself — it's a thin, rate-limited proxy. That boundary matters: it's
 where auth, rate limiting, and backend swapping happen without touching any UI code.
 
-**Execution backend — three options, in the order I'd actually deploy them:**
+**Execution backend — decided: the public [Piston](https://github.com/engineer-man/piston) API
+(`emkc.org`), used as-is, indefinitely.** This is a 2-user app. Piston's shared rate limit is 5
+req/sec *globally, across every user of the public instance* — two people clicking "Run" a lot
+still land nowhere near that. Zero infrastructure to run, zero infrastructure to patch, supports
+Scala already. Self-hosting Piston (a Docker Compose box you own) or building a warm-pool JVM
+runner are real options, but both are solving problems this app doesn't have: uptime SLAs,
+per-tenant isolation guarantees, or shared-limit contention. Revisit only if the userbase actually
+grows past "a handful of people" — the code needs no changes to switch (`EXECUTE_API_URL` env var
+is the only knob), so there's no cost to deferring it.
 
-1. **Public [Piston](https://github.com/engineer-man/piston) API (`emkc.org`)** — what this
-   prototype defaults to (`EXECUTE_API_URL` env var). Zero infrastructure, supports Scala out of
-   the box, good enough to develop and demo against. Wrong for production: shared rate limits (5
-   req/sec across everyone using it), no uptime guarantee, and you're sending every learner's code
-   to a third party.
-2. **Self-hosted Piston** — same API contract, so `/api/run` needs zero code changes, just an env
-   var pointing at your own instance. Piston sandboxes via `nsjail`/isolate, runs each submission
-   in a fresh, resource-capped environment, and already knows how to install a Scala runtime. This
-   is the right choice for launch: known-good isolation model, one Docker Compose file, no bespoke
-   security work.
-3. **Custom warm-pool runner** (only once Piston's cold-start latency becomes the bottleneck) — a
-   small fleet of containers with `scala-cli` pre-warmed and a JVM already up, fed through a queue,
-   so "Run" feels instant instead of "~1-2s including JVM boot." This is an optimization, not a
-   correctness requirement — don't build it until Piston's latency is actually the complaint.
+The one real tradeoff of the public API worth naming: learner code is sent to a third-party
+service (`emkc.org`), and there's no uptime guarantee. For two known users running small teaching
+snippets, that's an acceptable trade for shipping with zero ops burden.
 
 **Non-negotiable regardless of backend:** every execution is untrusted-code execution. Container
 isolation, wall-clock timeout (this repo: 10s), output size caps, no network access from the
