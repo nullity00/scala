@@ -1,0 +1,39 @@
+---
+title: Case Classes
+summary: Value semantics, equality, and copy.
+---
+
+A `case class` is a regular class with extra conveniences generated automatically — the natural
+choice for data that's mostly about *what it holds*, not custom behavior:
+
+```scala
+case class Point(x: Int, y: Int)
+
+val a = Point(1, 2)
+val b = Point(1, 2)
+
+println(a == b)        // true — compared by value, not identity
+println(a)              // Point(1,2) — readable toString for free
+val c = a.copy(y = 9)   // Point(1,9) — copy with one field changed
+println(c)
+```
+
+You get, for free: a public constructor, `equals`/`hashCode` based on the fields, a readable
+`toString`, and `.copy(...)` for making a modified duplicate without mutation. Case classes also
+work directly with `match`:
+
+```scala
+def onAxis(p: Point): String = p match
+  case Point(0, 0) => "origin"
+  case Point(_, 0) => "on x-axis"
+  case Point(0, _) => "on y-axis"
+  case _           => "elsewhere"
+```
+
+<TryIt initialCode={`case class Point(x: Int, y: Int)\n\nval a = Point(1, 2)\nval b = Point(1, 2)\n\nprintln(a == b)\nprintln(a)\nval c = a.copy(y = 9)\nprintln(c)`} />
+
+<Exercise
+  prompt='Define `case class Point(x: Int, y: Int)`. Create Point(2, 5), then use .copy to make a new point with x = 10, and print it — expected output "Point(10,5)".'
+  starterCode={`case class Point(x: Int, y: Int)\n\n@main def run(): Unit =\n  val p = Point(2, 5)\n  val moved = ???\n  println(moved)`}
+  tests={[{ label: "copy(x = 10) prints Point(10,5)", expected: "Point(10,5)" }]}
+/>

@@ -1,0 +1,27 @@
+---
+title: Values and Variables
+summary: val vs var and why immutability is the default.
+---
+
+Scala has two ways to bind a name to a value:
+
+```scala
+val x = 10   // immutable — cannot be reassigned
+var y = 10   // mutable — can be reassigned
+```
+
+`val` is the default you should reach for. Once assigned, it can never change — this is what
+"immutable" means, and it eliminates a whole category of bugs where a value changes underneath you
+unexpectedly. `var` exists for the cases where mutation is genuinely the clearest way to model
+something (loop counters, accumulators), but idiomatic Scala leans heavily on `val`.
+
+<TryIt initialCode={`val x = 10\nvar y = 10\ny = y + 5\nprintln(s"x = $x, y = $y")`} />
+
+Try changing `x = x + 5` in the sandbox above — the compiler will refuse it with
+`error: reassignment to val`. That's the compiler protecting you.
+
+<Exercise
+  prompt='Declare an immutable value named `pi` equal to 3.14159 and print it.'
+  starterCode={`@main def run(): Unit =\n  val pi = ???\n  println(pi)`}
+  tests={[{ label: "prints 3.14159", expected: "3.14159" }]}
+/>

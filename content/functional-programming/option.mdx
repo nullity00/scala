@@ -1,0 +1,33 @@
+---
+title: 'Option: Modeling Absence'
+summary: Replacing null with Option.
+---
+
+Scala discourages `null`. Instead, a value that might be missing is wrapped in `Option[T]`, which
+is either `Some(value)` or `None`. This forces you to handle the "missing" case at compile time
+instead of discovering it as a runtime `NullPointerException`.
+
+```scala
+def findUser(id: Int): Option[String] =
+  if id == 1 then Some("Ada") else None
+
+val result = findUser(1)
+println(result.getOrElse("unknown"))   // Ada
+println(findUser(2).getOrElse("unknown"))  // unknown
+```
+
+`Option` supports the same `map`/`filter`/`match` toolkit as collections, because it's treated as
+a container holding zero or one values:
+
+```scala
+val name: Option[String] = Some("ada")
+println(name.map(_.toUpperCase))   // Some(ADA)
+```
+
+<TryIt initialCode={`def findUser(id: Int): Option[String] =\n  if id == 1 then Some("Ada") else None\n\nprintln(findUser(1).getOrElse("unknown"))\nprintln(findUser(2).getOrElse("unknown"))`} />
+
+<Exercise
+  prompt='Write `safeDivide(a: Int, b: Int): Option[Int]` returning None when b is 0, otherwise Some(a / b). Print safeDivide(10, 0).getOrElse(-1).'
+  starterCode={`def safeDivide(a: Int, b: Int): Option[Int] =\n  if b == 0 then ??? else ???\n\n@main def run(): Unit =\n  println(safeDivide(10, 0).getOrElse(-1))`}
+  tests={[{ label: "safeDivide(10, 0) falls back to -1", expected: "-1" }]}
+/>

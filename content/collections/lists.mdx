@@ -1,0 +1,26 @@
+---
+title: Lists
+summary: Immutable singly-linked lists.
+---
+
+`List` is Scala's default sequence — immutable, ordered, and built from the standard library.
+
+```scala
+val nums = List(1, 2, 3, 4, 5)
+println(nums.head)        // 1 — first element
+println(nums.tail)        // List(2, 3, 4, 5) — everything but the first
+println(nums.length)      // 5
+println(0 :: nums)        // List(0, 1, 2, 3, 4, 5) — prepend with ::
+println(nums ++ List(6))  // append with ++
+```
+
+Because lists are immutable, every "modifying" operation returns a *new* list rather than
+changing the original in place — `nums` itself never changes.
+
+<TryIt initialCode={`val nums = List(1, 2, 3, 4, 5)\nprintln(nums.head)\nprintln(nums.tail)\nprintln(0 :: nums)\nprintln(nums ++ List(6))`} />
+
+<Exercise
+  prompt='Given `val nums = List(10, 20, 30)`, print the sum of all elements using .sum.'
+  starterCode={`@main def run(): Unit =\n  val nums = List(10, 20, 30)\n  println(???)`}
+  tests={[{ label: "sum of List(10, 20, 30) == 60", expected: "60" }]}
+/>

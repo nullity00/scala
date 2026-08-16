@@ -1,0 +1,26 @@
+---
+title: Higher-Order Functions
+summary: Functions that take or return functions.
+---
+
+Because functions are values in Scala, you can pass one function as an argument to another. A
+function that does this is called a **higher-order function**:
+
+```scala
+def applyTwice(f: Int => Int, x: Int): Int =
+  f(f(x))
+
+val increment: Int => Int = x => x + 1
+println(applyTwice(increment, 5))  // 7
+```
+
+`Int => Int` is a **function type**: "a function from Int to Int." This is the pattern behind
+`map`, `filter`, and every other collection operation you'll learn in the *Collections* module.
+
+<TryIt initialCode={`def applyTwice(f: Int => Int, x: Int): Int =\n  f(f(x))\n\nval increment: Int => Int = x => x + 1\nprintln(applyTwice(increment, 5))`} />
+
+<Exercise
+  prompt='Write `applyTwice(f: Int => Int, x: Int): Int` (as above) and a function `double` that doubles a number. Call applyTwice(double, 3) and print the result — should be 12.'
+  starterCode={`def applyTwice(f: Int => Int, x: Int): Int =\n  ???\n\nval double: Int => Int = x => ???\n\n@main def run(): Unit =\n  println(applyTwice(double, 3))`}
+  tests={[{ label: "applyTwice(double, 3) == 12", expected: "12" }]}
+/>

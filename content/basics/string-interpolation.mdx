@@ -1,0 +1,29 @@
+---
+title: String Interpolation
+summary: s-strings, f-strings, and raw strings.
+---
+
+Prefixing a string literal with `s` lets you embed expressions directly inside it using `$`:
+
+```scala
+val name = "Ada"
+val age = 30
+println(s"$name is $age years old")
+println(s"Next year: ${age + 1}")
+```
+
+Use `${ }` when the expression is more than a single identifier. There's also an `f`-interpolator
+for `printf`-style formatting:
+
+```scala
+val price = 19.999
+println(f"Total: $$${price}%.2f")
+```
+
+<TryIt initialCode={`val name = "Ada"\nval age = 30\nprintln(s"$name is $age years old")\nprintln(s"Next year: \${age + 1}")`} />
+
+<Exercise
+  prompt='Given `val item = "coffee"` and `val qty = 3`, print exactly: "3x coffee" using string interpolation.'
+  starterCode={`@main def run(): Unit =\n  val item = "coffee"\n  val qty = 3\n  println(???)`}
+  tests={[{ label: "prints 3x coffee", expected: "3x coffee" }]}
+/>

@@ -1,0 +1,29 @@
+---
+title: Traits
+summary: Interfaces with implementation, mixins.
+---
+
+A `trait` is like a Java interface, but it can also hold concrete method implementations and
+state. Classes can mix in multiple traits with `extends` and `with`:
+
+```scala
+trait Greeter:
+  def name: String
+  def greet(): String = s"Hello, $name!"  // default implementation
+
+class English(val name: String) extends Greeter
+
+val g = English("Ada")
+println(g.greet())
+```
+
+Traits are how Scala achieves the benefits of multiple inheritance without its usual pitfalls —
+each trait contributes behavior, and the compiler linearizes them predictably.
+
+<TryIt initialCode={`trait Greeter:\n  def name: String\n  def greet(): String = s"Hello, $name!"\n\nclass English(val name: String) extends Greeter\n\nval g = English("Ada")\nprintln(g.greet())`} />
+
+<Exercise
+  prompt='Define `trait Shape` with an abstract method `area(): Int`. Define `class Square(side: Int) extends Shape` implementing area as side * side. Create Square(5) and print its area.'
+  starterCode={`trait Shape:\n  def area(): Int\n\nclass Square(side: Int) extends Shape:\n  def area(): Int = ???\n\n@main def run(): Unit =\n  println(Square(5).area())`}
+  tests={[{ label: "Square(5).area() == 25", expected: "25" }]}
+/>

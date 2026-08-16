@@ -1,0 +1,30 @@
+---
+title: Installing Scala
+summary: JDK, scala-cli, sbt, and coursier.
+---
+
+You don't need anything installed to follow this tutorial — every example runs in the browser sandbox.
+But to write real Scala projects on your own machine, here's what you need:
+
+1. **A JDK** (Java Development Kit) — Scala compiles to JVM bytecode, so you need a JVM. Version 11
+   or newer works well; most people use [Temurin](https://adoptium.net/) or a version manager like
+   [SDKMAN!](https://sdkman.io/).
+2. **[scala-cli](https://scala-cli.virtuslab.org/)** — the fastest way to run single files and small
+   scripts. Install it, then run `scala-cli hello.scala` and it compiles and runs in one step.
+3. **[sbt](https://www.scala-sbt.org/)** — the standard build tool for multi-module projects,
+   dependency management, and publishing. You'll meet it later in the *Tooling & Testing* module.
+4. **An editor** — VS Code with the [Metals](https://scalameta.org/metals/) extension, or IntelliJ
+   IDEA with the Scala plugin, both give you autocomplete, inline errors, and go-to-definition.
+
+### Quick local check
+
+Once installed, this is the equivalent of what the in-browser sandbox does for you on every "Run":
+
+```bash
+echo 'println("Hello, World!")' > hello.scala
+scala-cli hello.scala
+```
+
+For now, keep using the sandbox below to get instant feedback without touching your terminal.
+
+<TryIt initialCode={`println("scala-cli hello.scala")\nprintln("Hello, World!")`} />

@@ -1,0 +1,33 @@
+---
+title: Data Types
+summary: Int, Double, Boolean, Char, String, Unit, Any.
+---
+
+Scala's basic types map closely to Java's primitives, but they're all real objects with methods:
+
+| Type      | Example         | Notes                                  |
+|-----------|-----------------|-----------------------------------------|
+| `Int`     | `42`            | 32-bit signed integer                   |
+| `Long`    | `42L`           | 64-bit signed integer                   |
+| `Double`  | `3.14`          | 64-bit floating point                   |
+| `Boolean` | `true`, `false` |                                          |
+| `Char`    | `'a'`           | single character                        |
+| `String`  | `"hello"`       | not primitive, but used constantly      |
+| `Unit`    | `()`            | like `void` — "no meaningful value"     |
+
+Scala almost always **infers** the type from the value you assign, so you rarely write it out —
+but you can always be explicit:
+
+```scala
+val age: Int = 30
+val price: Double = 19.99
+val isReady: Boolean = true
+```
+
+<TryIt initialCode={`val age: Int = 30\nval price: Double = 19.99\nval isReady: Boolean = true\nprintln(s"age=$age price=$price isReady=$isReady")`} />
+
+<Exercise
+  prompt='Declare an `Int` named `count` equal to 7, a `Boolean` named `active` equal to true, and print them as "7 true".'
+  starterCode={`@main def run(): Unit =\n  val count: Int = ???\n  val active: Boolean = ???\n  println(s"$count $active")`}
+  tests={[{ label: "prints 7 true", expected: "7 true" }]}
+/>

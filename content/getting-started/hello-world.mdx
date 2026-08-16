@@ -1,0 +1,33 @@
+---
+title: Hello, World
+summary: Your first program and the REPL.
+---
+
+Every Scala file with a top-level `@main` method is directly runnable. This is the modern
+(Scala 3) way to write an entry point — no boilerplate `object ... extends App` required:
+
+```scala
+@main def hello(): Unit =
+  println("Hello, World!")
+```
+
+<TryIt initialCode={`@main def hello(): Unit =\n  println("Hello, World!")`} />
+
+`println` writes a line to standard output. You'll use it constantly while learning — it's the
+simplest way to see what a piece of code actually produces.
+
+### The REPL
+
+Scala also has a **REPL** (Read-Eval-Print Loop) — an interactive shell where you type an
+expression and immediately see its value. Every "Try it Yourself" box in this course behaves like
+a REPL session: it runs your code and shows the result instantly.
+
+<Exercise
+  prompt="Write a program that prints your name followed by an exclamation mark, e.g. Ada!"
+  starterCode={`@main def hello(): Unit =\n  // print a name followed by "!"\n  ???`}
+  tests={[{ label: "prints a name followed by !", expected: "Ada!" }]}
+/>
+
+Don't worry about matching the exact test value shown above yet — for this first exercise, replace
+`???` with `println("Ada!")` and press **Check My Code** to see the instant pass/fail feedback loop
+you'll use throughout the course.

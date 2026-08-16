@@ -1,0 +1,28 @@
+---
+title: What is Scala?
+summary: Scala, the JVM, and why the language exists.
+---
+
+**Scala** (short for *Scalable Language*) is a general-purpose programming language that blends
+**object-oriented** and **functional** programming in one concise, statically-typed package. It
+compiles to JVM bytecode, so it runs anywhere Java runs and can use any Java library directly.
+
+A few things make Scala worth learning:
+
+- **Every value is an object**, and every operation is a method call — even `1 + 2` is really `1.+(2)`.
+- **Functions are first-class values** — you can pass them around, return them, and store them in variables.
+- **The type system is expressive** but usually gets out of your way thanks to type inference.
+- **It runs on the JVM**, so you get Java's ecosystem, tooling, and performance characteristics for free.
+
+Companies like Twitter (now X), LinkedIn, Netflix, and Databricks (creators of Apache Spark) built
+core infrastructure in Scala because it lets teams write concise, safe code that also scales.
+
+```scala
+val greeting = "Hello, JVM!"
+println(greeting)
+```
+
+<TryIt initialCode={`val greeting = "Hello, JVM!"\nprintln(greeting)`} />
+
+Throughout this course you'll see runnable examples like the one above everywhere — click **Run** to
+execute real Scala code against a JVM in the background. No local install required to follow along.

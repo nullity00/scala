@@ -1,0 +1,29 @@
+---
+title: Maps and Sets
+summary: Key-value pairs and uniqueness.
+---
+
+A `Map[K, V]` holds key-value pairs with unique keys. A `Set[T]` holds unique values with no
+particular order.
+
+```scala
+val ages = Map("Ada" -> 30, "Grace" -> 45)
+println(ages("Ada"))                 // 30
+println(ages.get("Bob"))             // None — safe lookup
+println(ages + ("Bob" -> 22))        // adds a new entry (new map)
+
+val letters = Set("a", "b", "a", "c")
+println(letters)                     // Set(a, b, c) — duplicates dropped
+println(letters.contains("b"))       // true
+```
+
+`ages("Bob")` directly would throw, since the key doesn't exist — `.get` returns an `Option`
+instead, which is the safer, idiomatic way to look things up.
+
+<TryIt initialCode={`val ages = Map("Ada" -> 30, "Grace" -> 45)\nprintln(ages("Ada"))\nprintln(ages.get("Bob"))\n\nval letters = Set("a", "b", "a", "c")\nprintln(letters.contains("b"))`} />
+
+<Exercise
+  prompt='Given `val scores = Map("Ada" -> 90, "Bob" -> 75)`, print the score for "Bob".'
+  starterCode={`@main def run(): Unit =\n  val scores = Map("Ada" -> 90, "Bob" -> 75)\n  println(???)`}
+  tests={[{ label: 'scores("Bob") == 75', expected: "75" }]}
+/>

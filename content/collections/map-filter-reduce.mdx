@@ -1,0 +1,28 @@
+---
+title: map, filter, reduce, fold
+summary: The core transformation toolkit.
+---
+
+These four higher-order functions cover most of what you'll do with collections in Scala, and
+once they click, you'll rarely write a manual loop again.
+
+```scala
+val nums = List(1, 2, 3, 4, 5)
+
+println(nums.map(_ * 2))            // List(2,4,6,8,10) — transform each element
+println(nums.filter(_ % 2 == 0))    // List(2,4) — keep elements matching a predicate
+println(nums.reduce(_ + _))         // 15 — combine all elements into one
+println(nums.foldLeft(100)(_ + _))  // 115 — like reduce, but with a starting value
+```
+
+`_` here is shorthand for "the argument to this lambda" — `_ * 2` means `x => x * 2`. `reduce`
+requires a non-empty collection; `foldLeft` works even on an empty one because you supply the
+starting value.
+
+<TryIt initialCode={`val nums = List(1, 2, 3, 4, 5)\n\nprintln(nums.map(_ * 2))\nprintln(nums.filter(_ % 2 == 0))\nprintln(nums.reduce(_ + _))\nprintln(nums.foldLeft(100)(_ + _))`} />
+
+<Exercise
+  prompt='Given `val nums = List(1, 2, 3, 4, 5, 6)`, print the sum of only the even numbers using filter and sum — expected 12.'
+  starterCode={`@main def run(): Unit =\n  val nums = List(1, 2, 3, 4, 5, 6)\n  println(???)`}
+  tests={[{ label: "sum of evens in 1..6 == 12", expected: "12" }]}
+/>

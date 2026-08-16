@@ -1,0 +1,30 @@
+---
+title: Pattern Matching
+summary: match expressions, guards, and destructuring.
+---
+
+`match` is Scala's most-used control structure — think of it as a `switch` that can destructure
+data, not just compare values:
+
+```scala
+def describe(x: Int): String = x match
+  case 0          => "zero"
+  case n if n < 0 => "negative"
+  case _          => "positive"
+
+println(describe(-5))
+```
+
+Each `case` is tried top to bottom. `case _` is the wildcard — "match anything else." A
+`case n if n < 0` is a **guard**: it only matches when the condition after `if` also holds.
+
+<TryIt initialCode={`def describe(x: Int): String = x match\n  case 0          => "zero"\n  case n if n < 0 => "negative"\n  case _          => "positive"\n\nprintln(describe(-5))\nprintln(describe(0))\nprintln(describe(42))`} />
+
+`match` also works on tuples, lists, and case classes (you'll see that combination in the
+*Case Classes* lesson) — it's the backbone of idiomatic Scala.
+
+<Exercise
+  prompt='Write a function `dayName(n: Int): String` returning "Saturday" for 6, "Sunday" for 7, and "Weekday" for anything else, using match. Call it with 6 and print the result.'
+  starterCode={`def dayName(n: Int): String = n match\n  case 6 => ???\n  case 7 => ???\n  case _ => ???\n\n@main def run(): Unit =\n  println(dayName(6))`}
+  tests={[{ label: "dayName(6) == Saturday", expected: "Saturday" }]}
+/>

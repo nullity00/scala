@@ -1,0 +1,27 @@
+---
+title: Classes and Objects
+summary: Defining classes, constructors, methods.
+---
+
+A `class` bundles state and behavior. Constructor parameters go right in the class signature:
+
+```scala
+class Person(val name: String, var age: Int):
+  def greet(): String = s"Hi, I'm $name"
+
+val p = Person("Ada", 30)
+println(p.greet())
+p.age = 31
+println(p.age)
+```
+
+`val name` in the parameter list creates a read-only field; `var age` creates a mutable one.
+Create instances with `Person(...)` — no `new` keyword needed in modern Scala.
+
+<TryIt initialCode={`class Person(val name: String, var age: Int):\n  def greet(): String = s"Hi, I'm $name"\n\nval p = Person("Ada", 30)\nprintln(p.greet())\np.age = 31\nprintln(p.age)`} />
+
+<Exercise
+  prompt='Define a class `Rectangle(width: Int, height: Int)` with a method `area(): Int`. Create Rectangle(3, 4) and print its area.'
+  starterCode={`class Rectangle(width: Int, height: Int):\n  def area(): Int = ???\n\n@main def run(): Unit =\n  val r = Rectangle(3, 4)\n  println(r.area())`}
+  tests={[{ label: "Rectangle(3, 4).area() == 12", expected: "12" }]}
+/>

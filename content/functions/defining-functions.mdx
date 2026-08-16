@@ -1,0 +1,31 @@
+---
+title: Defining Functions
+summary: def, parameters, return types.
+---
+
+Functions are defined with `def`, a name, parameters, and a return type. The return type can
+usually be inferred, but it's good practice to write it explicitly for anything public:
+
+```scala
+def add(a: Int, b: Int): Int =
+  a + b
+
+println(add(2, 3))
+```
+
+There's no `return` keyword needed — the last expression in the function body is the result.
+Multi-line bodies use a block:
+
+```scala
+def square(x: Int): Int =
+  val result = x * x
+  result
+```
+
+<TryIt initialCode={`def add(a: Int, b: Int): Int =\n  a + b\n\ndef square(x: Int): Int =\n  val result = x * x\n  result\n\nprintln(add(2, 3))\nprintln(square(5))`} />
+
+<Exercise
+  prompt='Write a function `greet(name: String): String` that returns "Hi, " followed by the name. Call greet("Ada") and print the result.'
+  starterCode={`def greet(name: String): String =\n  ???\n\n@main def run(): Unit =\n  println(greet("Ada"))`}
+  tests={[{ label: 'greet("Ada") == "Hi, Ada"', expected: "Hi, Ada" }]}
+/>
